@@ -1,0 +1,2 @@
+# EjerciciosSQL
+Ingenieria de datos
