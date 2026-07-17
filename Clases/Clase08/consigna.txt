@@ -1,0 +1,47 @@
+PetroPlus es una empresa petrolera con operaciones activas en distintos yacimientos del país. En los últimos meses, la dirección técnica notó variaciones inusuales en los volúmenes extraídos por pozo, y algunos reportes inconsistentes en los dashboards operativos. 
+
+Se solicita al equipo de datos (vos, estudiante) realizar una auditoría de rendimiento para: 
+
+Detectar pozos con bajo rendimiento. 
+Comparar producción real vs esperada. 
+Crear vistas reutilizables para reportes. 
+Identificar errores en las vistas existentes. 
+Para esto, PetroPlus ha entregado un backup forense de su base operativa al equipo de análisis. 
+
+Base de datos: PetroPlus será entregada como .bak junto con un instructivo para restauración. 
+
+Entidades 
+
+Pozos: Contiene el listado de pozos de extracción. Incluye su nombre, tipo, yacimiento y estado (activo/inactivo). 
+
+Extracciones: Registra cada extracción realizada: pozo, fecha y volumen extraído en m³. 
+
+ProduccionEsperada: Define cuánto se esperaba extraer por pozo, mes y año. Sirve como referencia para evaluar el rendimiento real. 
+
+Técnicos: Contiene el listado de técnicos operativos, con su legajo y nombre completo. 
+
+Asignaciones: Vincula técnicos con pozos, indicando desde qué fecha estuvieron asignados. 
+
+Parte 1 – Exploración inicial 
+
+Listar los pozos activos y su tipo (SELECT simple). 
+Verificar cuántas extracciones hay por pozo (GROUP BY). 
+Usar sp_help, sys.tables y sys.views para conocer la estructura. 
+Parte 2 – Creación de vistas 
+
+Crear una vista Vista_ExtraccionMensual con: 
+Pozo, Mes, Año, Volumen total extraído. 
+Agrupado y ordenado. 
+Crear Vista_RendimientoComparado con: 
+Volumen estimado vs. real por pozo y mes. 
+Parte 3 – Subconsultas 
+
+Mostrar los pozos cuyo volumen promedio extraído es menor al 75% del esperado (subconsulta correlacionada). 
+Listar técnicos que trabajaron solo en pozos con rendimiento alto (uso de ALL o NOT EXISTS). 
+Crear una subconsulta en SELECT para mostrar la diferencia porcentual entre producción real y esperada. 
+Parte 4 – Reparación de vista 
+
+La vista ReportesRendimiento fue diseñada originalmente para mostrar el rendimiento de extracción de los pozos activos de la empresa, comparando el volumen real extraído por mes con la producción estimada. Debería incluir: IdPozo, NombrePozo, Mes, Año, VolumenRealExtraído (suma del mes), VolumenEstimado para ese mes. Sin embargo, la vista actual presenta los siguientes errores: compara datos solo por pozo, sin tener en cuenta mes y año, incluye pozos inactivos y duplica información o combina estimaciones incorrectas por cada fila de extracción. La tarea es, Analizar la vista, Detectar y explicar los errores que presenta, corregirla para que cumpla su propósito: 
+Match por MONTH() y YEAR(). 
+Evitar pozos inactivos.  
+Eliminar duplicación. 

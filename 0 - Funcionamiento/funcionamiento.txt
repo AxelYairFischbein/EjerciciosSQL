@@ -1,0 +1,21 @@
+1. Instalar la extencion en Visual SQL Server (mssql)
+2. Ctrl+Shift+P y escribir 
+localhost\SQLEXPRESS
+3. Crear archivo .sql y escribir la consulta deseada
+4. abrir el cmd y hacer cd en la carpeta donde se encuentra el archivo .sql y ejecutar
+sc config SQLBrowser start= auto
+net start SQLBrowser
+5. Ejectuar en la cmd y "verificar la version" de SQL Server con el comando
+dir C:\Windows\SysWOW64\SQLServerManager*.msc
+dir C:\Windows\System32\SQLServerManager*.msc
+6. abrir Win+R y escribir el comando: (DEPENDIENDO LA VERSION DE SQL SERVER)
+SQLServerManager17.msc
+7. En el panel habilitar tcp/ip dentro de config/protocolo (Captura2.png)
+8. En la cmd ejecutar:
+net stop MSSQL$SQLEXPRESS
+net start MSSQL$SQLEXPRESS
+tasklist /fi "imagename eq sqlservr.exe"
+netstat -ano | findstr 15808
+TCP    0.0.0.0:49823    0.0.0.0:0    LISTENING    15808
+5. Ejecutar la query con Ctrl+Shift+E  (Captura1.png)
+server name: localhost,59482
