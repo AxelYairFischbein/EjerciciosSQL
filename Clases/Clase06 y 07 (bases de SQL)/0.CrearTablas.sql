@@ -1,6 +1,8 @@
 -- Paso 1: Crear Base de datos "Empresa"
 CREATE DATABASE Empresa;
 GO
+
+-- Paso 2: Usar la base de datos creada
 USE Empresa;
 GO
 
@@ -44,9 +46,3 @@ CREATE TABLE RecursosHumanos.Estudios (
     Descripcion NVARCHAR(100)
 );
 GO
-
--- Paso 5: Índices
-CREATE INDEX IX_Empleados_Nombre ON RecursosHumanos.Empleados(Nombre);
-CREATE INDEX IX_Empleados_Salario ON RecursosHumanos.Empleados(Salario);
-GO
-

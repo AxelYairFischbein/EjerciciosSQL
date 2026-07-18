@@ -1,0 +1,16 @@
+Práctica con Vistas en la BD Empresa 
+Contexto 
+
+El área de RRHH necesita facilitar reportes recurrentes sobre empleados, departamentos, categorías, hijos y estudios.
+En lugar de repetir consultas complejas, se van a crear vistas que simplifiquen el acceso a la información. 
+*** Usar Base de Datos EMPRESA creada la clase pasada.
+
+Consigna:
+
+Operador IN: Listar los nombres de empleados que trabajan en los departamentos de “Ventas” o “Marketing”.
+Operador ANY: Mostrar empleados cuyo salario sea mayor que el de al menos un empleado de “Finanzas”.
+Operador ALL: Listar empleados cuyo salario supere al de todos los empleados de “Marketing”.
+Operador EXISTS: Listar empleados que participan en al menos un proyecto.
+Operador NOT EXISTS: Mostrar empleados que no estén asignados a ningún proyecto.
+Operador BETWEEN con subconsulta: Encontrar empleados cuyo salario esté entre el mínimo y máximo salario de los empleados en “Sistemas”.
+Join con el nuevo esquema: Mostrar proyectos con el nombre de sus empleados asignados y el rol dentro del proyecto.

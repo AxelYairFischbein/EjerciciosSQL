@@ -1,4 +1,6 @@
-PetroPlus es una empresa petrolera con operaciones activas en distintos yacimientos del país. En los últimos meses, la dirección técnica notó variaciones inusuales en los volúmenes extraídos por pozo, y algunos reportes inconsistentes en los dashboards operativos. 
+PetroPlus es una empresa petrolera con operaciones activas en distintos yacimientos del país.
+ En los últimos meses, la dirección técnica notó variaciones inusuales en los volúmenes extraídos
+  por pozo, y algunos reportes inconsistentes en los dashboards operativos. 
 
 Se solicita al equipo de datos (vos, estudiante) realizar una auditoría de rendimiento para: 
 
@@ -41,7 +43,14 @@ Listar técnicos que trabajaron solo en pozos con rendimiento alto (uso de ALL o
 Crear una subconsulta en SELECT para mostrar la diferencia porcentual entre producción real y esperada. 
 Parte 4 – Reparación de vista 
 
-La vista ReportesRendimiento fue diseñada originalmente para mostrar el rendimiento de extracción de los pozos activos de la empresa, comparando el volumen real extraído por mes con la producción estimada. Debería incluir: IdPozo, NombrePozo, Mes, Año, VolumenRealExtraído (suma del mes), VolumenEstimado para ese mes. Sin embargo, la vista actual presenta los siguientes errores: compara datos solo por pozo, sin tener en cuenta mes y año, incluye pozos inactivos y duplica información o combina estimaciones incorrectas por cada fila de extracción. La tarea es, Analizar la vista, Detectar y explicar los errores que presenta, corregirla para que cumpla su propósito: 
+La vista ReportesRendimiento fue diseñada originalmente para mostrar el rendimiento de extracción
+de los pozos activos de la empresa, comparando el volumen real extraído por mes con la producción
+estimada. Debería incluir: IdPozo, NombrePozo, Mes, Año, VolumenRealExtraído (suma del mes), 
+VolumenEstimado para ese mes. Sin embargo, la vista actual presenta los siguientes errores: compara
+datos solo por pozo, sin tener en cuenta mes y año, incluye pozos inactivos y duplica información o
+combina estimaciones incorrectas por cada fila de extracción. La tarea es, Analizar la vista, Detectar
+y explicar los errores que presenta, corregirla para que cumpla su propósito: 
+
 Match por MONTH() y YEAR(). 
 Evitar pozos inactivos.  
 Eliminar duplicación. 
