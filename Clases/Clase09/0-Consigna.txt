@@ -1,0 +1,127 @@
+En la misma base de datos donde operaron sobre las tablas, realizar las siguientes operaciones
+
+
+Ejercicio 1 – Procedimiento almacenado: Análisis de pedidos por cliente
+
+Objetivo: 
+
+Crear un procedimiento almacenado que permita analizar cuántos pedidos realizó un cliente y mostrar mensajes distintos según el resultado. 
+
+Consigna: 
+
+Crear un procedimiento llamado sp_AnalizarPedidosCliente que reciba como parámetro: 
+@ID_Cliente INT 
+Dentro del procedimiento: 
+Declarar una variable local @TotalPedidos que almacene la cantidad de pedidos asociados al cliente recibido. 
+Usar una consulta SELECT con COUNT() para asignar ese valor. 
+Mostrar con PRINT el ID del cliente y la cantidad total de pedidos. 
+Usar una estructura IF…ELSE para mostrar distintos mensajes: 
+Si no tiene pedidos → “El cliente no tiene pedidos registrados.” 
+Si tiene uno solo → “El cliente tiene un único pedido.” 
+Si tiene más de uno → “El cliente tiene múltiples pedidos.” 
+Probar el procedimiento con distintos valores de cliente existentes en la tabla C09Clientes. 
+Pistas: 
+
+Usar ISNULL() para evitar valores nulos. 
+Recordar que PRINT solo muestra texto (no tablas). 
+Usar RETURN para devolver el número de pedidos como código de salida. 
+ 
+
+Ejercicio 2 – Procedimiento almacenado: Cálculo del total de un pedido 
+
+Objetivo: 
+
+Crear un procedimiento que calcule el monto total de un pedido y evalúe si supera un valor límite. 
+
+Consigna: 
+
+Crear un procedimiento llamado sp_TotalPedido que reciba como parámetro: 
+@ID_Pedido INT 
+Declarar una variable @Total para guardar el total del pedido. 
+Calcular el total usando SUM(Cantidad * PrecioUnitario) desde la tabla DetalleC09Pedidos. 
+Mostrar el resultado con un PRINT. 
+Usar una estructura IF…ELSE para: 
+Si el total es mayor a 1000, mostrar “Pedido de alto valor. Verificar autorización.” 
+Si es menor o igual, mostrar “Pedido dentro del rango habitual.” 
+Probar el procedimiento con distintos pedidos existentes. 
+Pistas: 
+
+Convertir el valor numérico a texto con CAST() o CONVERT() para concatenar en el PRINT. 
+Recordar que SUM() ignora los valores nulos. 
+ 
+
+Ejercicio 3 – Función escalar: Clasificación de productos 
+
+Objetivo: 
+
+Crear una función que clasifique los productos según su precio unitario. 
+
+Consigna: 
+
+Crear una función llamada fn_CategoriaProducto que reciba: 
+@Precio DECIMAL(10,2) 
+Declarar una variable @Categoria de tipo VARCHAR(20). 
+Asignar un valor con una expresión CASE según los rangos de precio: 
+>= 1000 → 'Premium' 
+BETWEEN 500 AND 999 → 'Medio' 
+< 500 → 'Económico' 
+Devolver el valor final mediante RETURN. 
+Probar la función en una consulta sobre C09Productos: 
+SELECT NombreProducto, PrecioUnitario, dbo.fn_CategoriaProducto(PrecioUnitario) AS Categoria 
+FROM C09Productos; 
+Pistas: 
+
+Usar RETURN para devolver el valor escalar (obligatorio). 
+Recordar que el CASE se puede usar como expresión dentro de un SET o SELECT. 
+ 
+
+Ejercicio 4 – Función con valor de tabla en línea (iTVF): Pedidos por año 
+
+Objetivo: 
+
+Crear una función que devuelva todos los pedidos realizados en un año determinado. 
+
+Consigna: 
+
+Crear una función llamada fn_PedidosPorAnio que reciba: 
+@Anio INT 
+La función debe devolver una tabla (RETURNS TABLE) con los campos: 
+ID_Pedido, FechaPedido, NombreCliente, NombreSucursal. 
+Realizar los INNER JOIN necesarios entre C09Pedidos, C09Clientes y C09Sucursales. 
+Filtrar los pedidos según el año de la fecha: 
+Usar la función del sistema YEAR(FechaPedido) = @Anio. 
+Probar la función con: 
+SELECT * FROM fn_PedidosPorAnio(2024); 
+Pistas: 
+
+No se usa BEGIN...END ni RETURN con valor individual, solo RETURN (SELECT …). 
+Es una “vista parametrizable”: se puede usar dentro de otros SELECT o con filtros adicionales. 
+ 
+
+Ejercicio 5 – Función con valor de tabla multisentencia (mTVF): Promedio de ventas por cliente 
+
+Objetivo: 
+
+Crear una función que devuelva una tabla con los clientes y el promedio de sus compras, asignando una categoría según el valor obtenido. 
+
+Consigna: 
+
+Crear una función llamada fn_ClientesPromedio() que no reciba parámetros. 
+La función debe devolver una tabla con estas columnas: 
+ID_Cliente, NombreCliente, Promedio, Categoria 
+Dentro de la función: 
+Declarar una tabla variable @Tabla con esa estructura. 
+Insertar en @Tabla el promedio del total de cada cliente: 
+Calcularlo con AVG(dp.Cantidad * dp.PrecioUnitario). 
+Usar ISNULL() para reemplazar valores nulos (clientes sin pedidos). 
+Usar un CASE para clasificar: 
+Promedio > 800 → 'Alta' 
+Entre 400 y 800 → 'Media' 
+Menor a 400 → 'Baja' 
+Devolver la tabla con RETURN;. 
+Probar la función con: 
+SELECT * FROM fn_ClientesPromedio(); 
+Pistas: 
+
+Se permite usar LEFT JOIN para incluir clientes sin pedidos. 
+No se usa RETURN con valor, solo la palabra RETURN; al final. 

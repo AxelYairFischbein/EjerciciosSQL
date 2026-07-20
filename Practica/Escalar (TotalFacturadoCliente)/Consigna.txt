@@ -1,0 +1,13 @@
+Crear una función escalar que reciba el ID de un cliente y devuelva el monto total facturado a ese
+cliente.
+La función debe recibir: @ID_Cliente
+Debe devolver: Monto total facturado
+El total debe calcularse como:
+SUM(DetalleVentas.Cantidad * DetalleVentas.PrecioUnitario)
+Restricciones:
+• Debe ser una función escalar.
+• No puede devolver una tabla.
+• Si el cliente no tiene ventas, debe devolver 0.
+INGENIERIA DE DATOS I
+• No se puede usar cursor.
+• No se pueden modificar datos.

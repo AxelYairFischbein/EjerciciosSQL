@@ -1,0 +1,24 @@
+Práctica de funciones SQL Server
+Tablas de referencia para los ejercicios:
+Clientes(ID_Cliente, NombreCliente, LimiteCredito)
+Productos(ID_Producto, NombreProducto, ID_Categoria, Precio, Stock)
+Categorias(ID_Categoria, NombreCategoria)
+Ventas(ID_Venta, ID_Cliente, Fecha)
+DetalleVentas(ID_Venta, ID_Producto, Cantidad, PrecioUnitario)
+Empleados(ID_Empleado, NombreEmpleado, Sueldo)
+HorasTrabajadas(ID_Horas, ID_Empleado, Horas)
+1. Función con CTE
+Crear una función que devuelva los productos cuyo monto total vendido sea superior al promedio de
+monto vendido por producto. La función debe devolver:
+ID_Producto
+NombreProducto
+MontoTotalVendido
+El monto total vendido se calcula como:
+SUM(DetalleVentas.Cantidad * DetalleVentas.PrecioUnitario)
+Restricciones:
+• Debe usar CTE.
+• No se puede usar TOP.
+• No se puede usar MAX ni MIN.
+• No se pueden modificar datos de las tablas base.
+• Deben considerarse únicamente productos vendidos.
+Resultado

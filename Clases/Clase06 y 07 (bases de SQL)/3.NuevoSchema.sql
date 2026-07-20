@@ -1,16 +1,12 @@
 USE Empresa;
 GO
 
-/* ============================
-   2. Crear un nuevo esquema
-   ============================ */
+-- 2. Crear un nuevo esquema
 
 CREATE SCHEMA Proyectos;
 GO
 
-/* ============================
-   3. Crear tablas en el nuevo esquema
-   ============================ */
+-- 3. Crear tablas en el nuevo esquema
 
 CREATE TABLE Proyectos.Proyecto (
     IdProyecto INT PRIMARY KEY,

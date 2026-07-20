@@ -1,0 +1,24 @@
+Enunciado: Crear una MSTVF (Multi-Statement Table-Valued Function) que reciba un rango de fechas y devuelva un resumen de facturación
+por cliente, incluyendo una categoría según el monto facturado.
+La función debe recibir:
+@FechaDesde
+@FechaHasta
+Debe devolver:
+ID_Cliente
+NombreCliente
+MontoFacturado
+CategoriaCliente
+Reglas:
+Si el clienteno facturó en el período, CategoriaCliente = 'Sin ventas'
+Si facturó hasta 100000, CategoriaCliente = 'Bajo'
+Si facturó más de 100000 y hasta 500000, CategoriaCliente = 'Medio'
+Si facturó más de 500000, CategoriaCliente = 'Alto'
+Restricciones:
+• Debe ser una MSTVF.
+• Debe usar tabla de retorno.
+• Debe incluir clientes aunque no tengan ventas en el período.
+• Debe usar al menos un INSERT sobre la tabla de retorno.
+• Puede usar UPDATE sobre la tabla de retorno.
+• No puede modificar tablas base.
+• No puede usar TOP.
+• Si @FechaDesde es mayor que @FechaHasta, debe devolver la tabla vacía.

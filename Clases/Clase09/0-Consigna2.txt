@@ -1,0 +1,33 @@
+En esta actividad trabajaremos sobre un conjunto de tablas que representan el modelo de operaciones de una empresa
+ con clientes, productos, sucursales y pedidos. El objetivo es aplicar distintos tipos de combinaciones (JOINs) y 
+ subconsultas para resolver situaciones reales de análisis de datos relacionales. 
+
+La base de datos fue diseñada con fines pedagógicos y contiene registros de prueba que permiten practicar consultas
+ básicas, intermedias y avanzadas. 
+
+Objetivos de la tarea: 
+
+Aplicar correctamente los diferentes tipos de JOINs (INNER, LEFT, RIGHT, FULL, SELF JOIN). 
+Resolver consultas utilizando subconsultas en cláusulas SELECT y FROM. 
+Identificar combinaciones válidas entre entidades. 
+Obtener información útil que combine datos distribuidos en distintas tablas. 
+ 
+Instrucciones generales: 
+
+Utilizá el script provisto para crear las tablas C09Clientes, C09Sucursales, C09Productos, C09Pedidos y DetalleC09Pedidos. 
+Insertá los datos provistos en el mismo archivo .sql. 
+Resolvé cada una de las consultas propuestas utilizando los tipos de JOIN indicados. 
+Para cada consulta, verificá que los resultados sean correctos e interpretá el tipo de relación que se está explorando. 
+En los casos donde se usan subconsultas o condiciones especiales (IS NULL, HAVING, etc.), explicá brevemente qué hace la consulta. 
+
+Consultas de prueba con diferentes joins: 
+
+Devuelve los Clientes que han realizado pedidos y la fecha de los pedidos. 
+Devuelve todos los clientes, como el anterior, pero incluyendo aquellos que no han realizado pedidos. 
+Devuelve solo los clientes que no tienen pedidos. 
+Devuelve todos los pedidos junto con las sucursales. Si alguna sucursal no tiene pedidos, aparece en el resultado con NULL. 
+Devuelve todas las combinaciones posibles entre clientes y sucursales que están en la misma ciudad, e incluye NULL cuando no hay coincidencia. 
+Compara a los clientes consigo mismos para encontrar aquellos que viven en la misma ciudad, pero que no son la misma persona. 
+Devuelve los productos que se han pedido más de una vez por cualquier cliente. Usa una subconsulta para contar cuántos productos se han pedido más de una vez. 
+Devuelve la lista de todas las sucursales junto con los pedidos realizados en ellas, y el nombre del cliente que realizó el pedido. Si una sucursal no tiene ningún pedido, muestra "Sin pedido" en la columna de FechaPedido. 
+Devuelve la lista de sucursales que han realizado más de un pedido, utilizando una tabla derivada (subconsulta). La tabla derivada contendrá la cantidad de pedidos por sucursal, y luego se combinará con la tabla de sucursales para mostrar el nombre de la sucursal junto con la cantidad de pedidos. 

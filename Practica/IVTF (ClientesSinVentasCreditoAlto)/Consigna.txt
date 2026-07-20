@@ -1,0 +1,13 @@
+Enunciado: Crear una ITVF (Inline Table-Valued Function) que devuelva los clientes que nunca realizaron ventas y cuyo límite de
+crédito sea superior al promedio general de límite de crédito de todos los clientes.
+La función debe devolver:
+ID_Cliente
+NombreCliente
+LimiteCredito
+Restricciones:
+• Debe ser una Inline Table-Valued Function.
+• No puede usar BEGIN...END.
+• No puede usar tabla de retorno declarada manualmente.
+• No puede usar LEFT JOIN.
+• Debe usar NOT EXISTS.
+• Debe usar una subconsulta para calcular el promedio.

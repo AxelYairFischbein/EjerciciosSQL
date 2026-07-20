@@ -1,0 +1,23 @@
+Enunciado: Crear una MSTVF (Multi-Statement Table-Valued Function) que reciba dos parámetros de stock y devuelva los productos
+clasificados según su nivel de inventario.
+La función debe recibir:
+@StockCritico
+@StockMedio
+Debe devolver:
+ID_Producto
+NombreProducto
+Stock
+EstadoStock
+Reglas:
+Si Stock = 0, EstadoStock = 'Sin stock'
+Si Stock > 0 y Stock <= @StockCritico, EstadoStock = 'Crítico'
+Si Stock > @StockCritico y Stock <= @StockMedio, EstadoStock = 'Medio'
+Si Stock > @StockMedio, EstadoStock = 'Normal'
+Restricciones:
+• Debe ser una MSTVF.
+• Debe usar tabla de retorno.
+• Debe usar lógica condicional.
+• Si @StockCritico es menor que 0 o @StockMedio es menor que @StockCritico, debe
+devolver la tabla vacía.
+• No se pueden modificar datos de las tablas base.
+• No se puede usar cursor.

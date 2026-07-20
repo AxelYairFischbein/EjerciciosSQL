@@ -1,0 +1,22 @@
+transferir saldo entre cuentas
+Enunciado: Crear un procedimiento almacenado que transfiera saldo desde una cuenta origen hacia
+una cuenta destino.
+Tabla: Cuentas(ID_Cuenta, Titular, Saldo)
+El procedimiento debe recibir:
+@CuentaOrigen
+@CuentaDestino
+@Monto
+Debe realizar:
+1. Validar que la cuenta origen exista.
+2. Validar que la cuenta destino exista.
+3. Validar que ambas cuentas sean distintas.
+4. Validar que el monto sea mayor que cero.
+5. Validar que la cuenta origen tenga saldo suficiente.
+6. Restar el monto de la cuenta origen.
+7. Sumar el monto a la cuenta destino.
+Restricciones:
+• Debe usar BEGIN TRAN, COMMIT y ROLLBACK.
+• Debe usar TRY…CATCH.
+• Si alguna validación falla, debe deshacer la transacción y mostrar un error.
+• No se puede permitir que una cuenta quede con saldo negativo.
+• No se puede usar cursor.

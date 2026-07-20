@@ -1,0 +1,25 @@
+registrar una venta con validación de stock
+Enunciado: Crear un procedimiento almacenado que registre una venta de un producto a un cliente.
+Tablas:
+Clientes(ID_Cliente, NombreCliente)
+Productos(ID_Producto, NombreProducto, Stock, Precio)
+Ventas(ID_Venta, ID_Cliente, Fecha)
+DetalleVentas(ID_Venta, ID_Producto, Cantidad, PrecioUnitario)
+El procedimiento debe recibir:
+@ID_Cliente
+@ID_Producto
+@Cantidad
+Debe realizar:
+1. Validar que el cliente exista.
+2. Validar que el producto exista.
+3. Validar que la cantidad sea mayor que cero.
+4. Validar que haya stock suficiente.
+5. Insertar la venta en la tabla Ventas.
+6. Insertar el detalle en DetalleVentas.
+7. Descontar el stock del producto.
+Restricciones:
+• Debe usar BEGIN TRAN, COMMIT y ROLLBACK.
+• Debe usar TRY…CATCH.
+• Debe usar SCOPE_IDENTITY() para recuperar el ID de la venta insertada.
+• Si falla una validación, debe deshacer la transacción y mostrar un error.
+• No se puede permitir que el stock quede negativo.
