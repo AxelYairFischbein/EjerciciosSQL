@@ -2,7 +2,7 @@
 -- Usar la base de datos creada en la Clase 06
 USE Empresa;
 GO
-s
+
 /* ============================
    1. Insertar datos en esquema RecursosHumanos
    ============================ */
