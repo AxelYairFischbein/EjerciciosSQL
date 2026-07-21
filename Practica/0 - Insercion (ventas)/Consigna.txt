@@ -1,0 +1,11 @@
+SQL - Clientes con pedidos superiores al promedio
+Enunciado:
+Usando comandos de SQL, realiza las siguientes tareas:
+1. Crea un esquema llamado Ventas.
+2. Dentro del esquema Ventas, crea dos tablas:
+• Clientes: que almacene información básica sobre los clientes.
+• Pedidos: que almacene información sobre los pedidos realizados.
+3. Inserta dos registros aleatorios en la tabla Clientes y cinco registros aleatorios en la tabla
+Pedidos.
+4. Escribe una consulta que utilice una subconsulta anidada para obtener los clientes que hayan
+realizado pedidos cuyo importe sea superior al promedio de los importes de todos los pedidos.

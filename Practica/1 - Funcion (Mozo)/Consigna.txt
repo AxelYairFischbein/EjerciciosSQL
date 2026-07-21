@@ -1,0 +1,8 @@
+Funciones - Mozo con más facturación
+Ejercicio:
+Consultando las tablas Mozos y Facturas, escribir una función que devuelva una tabla que
+contenga el número de mozo, el nombre y apellido, y el total facturado del mozo que tiene la
+sumatoria de importes más grande (la mayor de las sumas de los importes de las facturas de cada
+mozo). Las restricciones son las siguientes:
+No se pueden utilizar subconsultas ni vistas en la cláusula FROM.
+No se pueden utilizar las funciones MAX o MIN.

@@ -1,0 +1,12 @@
+Gestión de transacciones en bases de datos relacionales
+Cuando varias transacciones acceden concurrentemente a los mismos datos, pueden producirse 
+anomalías si no se controla adecuadamente el aislamiento.
+Niveles de aislamiento de transacciones (Isolation Levels)
+Una lectura no repetible (non-repeatable read) ocurre cuando una transacción realiza dos lecturas 
+sobre el mismo dato y obtiene resultados distintos porque otra transacción modificó el dato entre 
+ambas lecturas.
+Lectura sucia (Dirty Read): Una transacción lee datos que otra transacción aún no ha confirmado 
+con COMMIT. 
+Lectura fantasma (Phantom Read): Una transacción ejecuta una consulta que devuelve un 
+conjunto de filas, y luego, en la misma transacción, otra consulta similar devuelve filas nuevas que 
+antes no estaban porque otra transacción insertó esos datos entre ambas consultas.
