@@ -1,0 +1,113 @@
+================================================================================
+                        CUARTA FORMA NORMAL (4FN)
+================================================================================
+
+--------------------------------------------------------------------------------
+1) DEFINICION
+--------------------------------------------------------------------------------
+Una relacion esta en Cuarta Forma Normal (4FN) si:
+
+   a) Ya esta en BCNF (y por lo tanto en 1FN, 2FN y 3FN), y
+   b) NO tiene dependencias multivaluadas (MVD) no triviales.
+
+En criollo: una tabla esta en 4FN cuando NO mezcla en la misma tabla dos (o mas)
+hechos multivaluados que son INDEPENDIENTES entre si.
+
+
+--------------------------------------------------------------------------------
+2) QUE ES UNA DEPENDENCIA MULTIVALUADA (MVD)
+--------------------------------------------------------------------------------
+Se escribe:   X ->> Y   (se lee "X multidetermina a Y")
+
+Ocurre cuando, para UN valor de X, existe un CONJUNTO de valores de Y, y ese
+conjunto es INDEPENDIENTE del resto de los atributos de la tabla.
+
+La palabra clave es INDEPENDIENTE:
+   - Un estudiante habla varios idiomas.
+   - Ese mismo estudiante practica varios deportes.
+   - Los idiomas NO tienen nada que ver con los deportes.
+
+Cuando guardo las dos cosas juntas en una sola tabla, me veo OBLIGADO a repetir
+todas las combinaciones (producto cartesiano), y ahi aparece la redundancia.
+
+
+--------------------------------------------------------------------------------
+3) EJEMPLO - EL PROBLEMA
+--------------------------------------------------------------------------------
+Ana habla Ingles y Frances, y practica Natacion y Tenis.
+Los idiomas y los deportes son independientes: Ana no "nada en ingles".
+
+Para representarlo en una sola tabla atomica tengo que poner TODAS las
+combinaciones posibles (2 idiomas x 2 deportes = 4 filas):
+
+   +------------+---------+-----------+
+   | ESTUDIANTE | IDIOMA  | DEPORTE   |
+   +------------+---------+-----------+
+   | Ana        | Ingles  | Natacion  |
+   | Ana        | Frances | Natacion  |
+   | Ana        | Ingles  | Tenis     |
+   | Ana        | Frances | Tenis     |
+   +------------+---------+-----------+
+
+Aca hay DOS dependencias multivaluadas:
+
+   ESTUDIANTE ->> IDIOMA
+   ESTUDIANTE ->> DEPORTE
+
+La clave es toda la tupla {Estudiante, Idioma, Deporte}, asi que ESTUDIANTE
+NO es superclave  =>  la tabla VIOLA la 4FN.
+
+
+--------------------------------------------------------------------------------
+4) POR QUE ES UN PROBLEMA (ANOMALIAS)
+--------------------------------------------------------------------------------
+- REDUNDANCIA: repito idiomas y deportes en varias filas sin necesidad.
+
+- INSERCION: si Ana empieza a estudiar Aleman, no me alcanza con agregar 1 fila:
+  tengo que agregar Aleman-Natacion Y Aleman-Tenis (una por cada deporte).
+
+- BORRADO: si Ana deja de jugar al Tenis, tengo que borrar varias filas y corro
+  el riesgo de perder tambien la informacion de los idiomas.
+
+- MODIFICACION: cualquier cambio se tiene que replicar en multiples filas.
+
+
+--------------------------------------------------------------------------------
+5) LA SOLUCION - DESCOMPONER
+--------------------------------------------------------------------------------
+Como los dos hechos son independientes, los separo en DOS tablas, una por cada
+dependencia multivaluada:
+
+   ESTUDIANTE_IDIOMA                ESTUDIANTE_DEPORTE
+   +------------+---------+         +------------+-----------+
+   | ESTUDIANTE | IDIOMA  |         | ESTUDIANTE | DEPORTE   |
+   +------------+---------+         +------------+-----------+
+   | Ana        | Ingles  |         | Ana        | Natacion  |
+   | Ana        | Frances |         | Ana        | Tenis     |
+   +------------+---------+         +------------+-----------+
+
+Ahora:
+   - En cada tabla queda una sola dependencia multivaluada, asi que SI cumplen 4FN.
+   - Pase de 4 filas a 2 + 2 = 4, pero SIN redundancia y sin combinaciones falsas.
+   - Si Ana estudia Aleman: agrego 1 sola fila en ESTUDIANTE_IDIOMA.
+   - Si deja el Tenis: borro 1 sola fila en ESTUDIANTE_DEPORTE, sin tocar idiomas.
+
+Y si necesito la vista original, la reconstruyo con un JOIN por Estudiante
+(descomposicion sin perdida de informacion).
+
+
+--------------------------------------------------------------------------------
+6) REGLA PARA ACORDARSE
+--------------------------------------------------------------------------------
+"Un hecho multivaluado por tabla."
+
+Si en una tabla hay DOS listas independientes asociadas a la misma clave
+(idiomas y deportes, telefonos y mails, hobbies y titulos, etc.), casi seguro
+estas violando la 4FN: separalas en dos tablas.
+
+Formalmente:
+   Para toda dependencia multivaluada no trivial  X ->> Y,
+   X debe ser SUPERCLAVE.
+
+
+================================================================================

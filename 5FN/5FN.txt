@@ -1,0 +1,135 @@
+================================================================================
+                        QUINTA FORMA NORMAL (5FN)
+                    (tambien llamada PJNF: Proyeccion-Union)
+================================================================================
+
+--------------------------------------------------------------------------------
+1) DEFINICION
+--------------------------------------------------------------------------------
+Una relacion esta en Quinta Forma Normal (5FN) si:
+
+   a) Ya esta en 4FN (y por lo tanto en BCNF, 3FN, 2FN, 1FN), y
+   b) Toda DEPENDENCIA DE REUNION (JOIN) que exista en la tabla es consecuencia
+      de sus claves candidatas (no hay dependencias de reunion "ocultas").
+
+En criollo: una tabla esta en 5FN cuando NO se puede partir en tablas mas chicas
+y volver a unirlas con JOIN sin generar filas de mas (filas espurias) ni perder
+informacion. Si SE puede partir y reconstruir exactamente, entonces habia una
+dependencia de reunion y hay que descomponerla.
+
+
+--------------------------------------------------------------------------------
+2) QUE ES UNA DEPENDENCIA DE REUNION (JOIN DEPENDENCY)
+--------------------------------------------------------------------------------
+Ocurre cuando una tabla se puede descomponer en TRES O MAS proyecciones que, al
+combinarlas con JOIN, reconstruyen exactamente la tabla original.
+
+Diferencia con la 4FN:
+   - La 4FN se resuelve partiendo en 2 tablas.
+   - La 5FN aparece cuando hace falta partir en 3 o mas tablas (relacion
+     "n-descomponible", con n mayor que 2) por una RESTRICCION CICLICA.
+
+Restriccion ciclica = tres atributos que se relacionan en circulo:
+   Producto - Proveedor - Cliente - (y vuelve a) Producto.
+
+
+--------------------------------------------------------------------------------
+3) EJEMPLO - EL PROBLEMA
+--------------------------------------------------------------------------------
+Regla de negocio (el ciclo):
+   - Un Proveedor provee ciertos Productos.
+   - Un Proveedor trabaja con ciertos Clientes.
+   - Un Cliente pide ciertos Productos.
+   Y ADEMAS: si un Proveedor provee un Producto, trabaja con un Cliente, y ese
+   Cliente pide ese Producto, entonces DEBE existir la fila que junta a los tres.
+
+Tabla original (ya esta en 4FN, no hay multivaluadas independientes):
+
+   +----------+-----------+---------+
+   | PRODUCTO | PROVEEDOR | CLIENTE |
+   +----------+-----------+---------+
+   | A        | P1        | C2      |
+   | A        | P2        | C1      |
+   | B        | P1        | C1      |
+   | A        | P1        | C1      |
+   +----------+-----------+---------+
+
+   Clave: {Producto, Proveedor, Cliente} (toda la tupla).
+
+El problema es que esa regla ciclica genera redundancia y anomalias, aunque la
+tabla ya cumpla 4FN.
+
+
+--------------------------------------------------------------------------------
+4) POR QUE ES UN PROBLEMA (ANOMALIAS)
+--------------------------------------------------------------------------------
+- INSERCION: para agregar el hecho "P1 ahora provee el Producto B" puede que
+  tenga que agregar varias filas para respetar el ciclo (una por cada cliente
+  con el que P1 ya trabaja y que pide B).
+
+- BORRADO: borrar el par (Cliente C1 pide Producto A) obliga a eliminar VARIAS
+  filas: (A, P1, C1) y (A, P2, C1).
+
+- MODIFICACION: cambiar un par (p. ej. "A provisto por P1") obliga a modificar
+  todas las filas donde aparece esa combinacion.
+
+La causa de fondo: hay un HECHO que en realidad es de a pares (Producto-Proveedor,
+Proveedor-Cliente, Cliente-Producto), pero lo estamos guardando de a tripletas.
+
+
+--------------------------------------------------------------------------------
+5) LA SOLUCION - DESCOMPONER EN 3 PROYECCIONES
+--------------------------------------------------------------------------------
+Separo el ciclo en sus tres pares:
+
+   PRODUCTO_PROVEEDOR      PROVEEDOR_CLIENTE       CLIENTE_PRODUCTO
+   +----------+--------+   +----------+--------+   +--------+----------+
+   | PRODUCTO | PROVE. |   | PROVE.   | CLIENTE|   | CLIENTE| PRODUCTO |
+   +----------+--------+   +----------+--------+   +--------+----------+
+   | A        | P1     |   | P1       | C2     |   | C2     | A        |
+   | A        | P2     |   | P2       | C1     |   | C1     | A        |
+   | B        | P1     |   | P1       | C1     |   | C1     | B        |
+   +----------+--------+   +----------+--------+   +--------+----------+
+
+Reconstruccion: la tabla original se recupera SOLO uniendo las TRES:
+
+   PRODUCTO_PROVEEDOR  |X|  PROVEEDOR_CLIENTE  |X|  CLIENTE_PRODUCTO
+   =>
+      A P1 C2
+      A P2 C1
+      B P1 C1
+      A P1 C1     (identica a la original)
+
+Clave del asunto:
+   - Si uno solo DOS de las tres proyecciones, aparecen FILAS ESPURIAS
+     (combinaciones falsas que no existian, por ejemplo  B P1 C2).
+   - Como necesito las TRES juntas para reconstruir sin error, la relacion es
+     3-descomponible: esa es la firma de que NO estaba en 5FN.
+
+Cada proyeccion ahora guarda un unico hecho de a pares, sin redundancia y sin
+anomalias de insercion/borrado/modificacion.
+
+
+--------------------------------------------------------------------------------
+6) REGLA PARA ACORDARSE
+--------------------------------------------------------------------------------
+- La 5FN casi siempre aparece con relaciones N:N:N y una REGLA CICLICA de negocio
+  que obliga a que "si estan los tres pares, tiene que existir la tripleta".
+
+- Test practico: si podes partir la tabla en 3 (o mas) tablas y reconstruirla
+  EXACTA con JOIN (sin filas de mas ni de menos), entonces habia una dependencia
+  de reunion => descomponer.
+
+- OJO: si el JOIN de 2 proyecciones genera filas espurias, esas 2 NO alcanzan;
+  se necesitan las 3. Eso confirma que la relacion es n-descomponible (n = 3).
+
+Formalmente:
+   Una relacion esta en 5FN si toda dependencia de reunion en ella esta
+   implicada por sus claves candidatas (no hay JOIN dependencies "extra").
+
+
+================================================================================
+Nota: la 5FN es la mas dificil de encontrar en la practica. La gran mayoria de
+los disenos correctos quedan bien con llegar hasta 3FN o BCNF; 4FN y 5FN aplican
+en casos particulares (multivaluadas independientes y ciclos N:N:N).
+================================================================================
