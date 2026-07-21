@@ -1,0 +1,14 @@
+Vista con JOIN + filtro
+
+Enunciado:
+Crear una vista vw_StockBajo que muestre:
+    ID_Producto
+    Nombre
+    Stock
+    Categoría
+
+Solo debe mostrar productos con stock menor a 20 unidades.
+
+Tablas de referencia:
+Productos(ID_Producto, Nombre, Stock, ID_Categoria)
+Categorias(ID_Categoria, NombreCategoria)

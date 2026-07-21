@@ -1,0 +1,13 @@
+Ejercicio 4 – Función escalar con lógica condicional
+
+Enunciado:
+Creá una función escalar llamada fn_CalcularCategoriaCliente que reciba el total de
+compras del cliente y retorne una categoría:
+• 'Bronce' si el total es menor a 10.000
+• 'Plata'  si está entre 10.000 y 50.000
+• 'Oro'    si supera los 50.000
+
+Usá CASE o lógica condicional.
+
+Debe recibir:
+    @TotalCompras

@@ -1,0 +1,13 @@
+Evitar lecturas sucias con nivel de aislamiento
+
+Enunciado:
+Crear un procedimiento sp_TotalVentasSeguro que:
+• Calcule el total de ventas de la tabla Ventas.
+• Evite lecturas sucias (dirty reads) usando un nivel de aislamiento adecuado.
+• Devuelva un mensaje indicando el total.
+
+Restricción:
+• No se permite usar READ UNCOMMITTED.
+
+Tabla de referencia:
+Ventas(ID_Venta, Importe)

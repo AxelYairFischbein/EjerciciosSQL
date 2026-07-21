@@ -1,0 +1,10 @@
+CTE recursivo: cadena jerárquica
+
+Enunciado:
+Dada la tabla Empleados(ID, Nombre, ID_Jefe), crear una consulta con CTE recursiva que:
+• Devuelva todos los empleados.
+• Incluya su nivel dentro de la jerarquía (1 = jefe máximo).
+
+Tabla de referencia:
+Empleados(ID, Nombre, ID_Jefe)
+    ID_Jefe es NULL para el jefe máximo.

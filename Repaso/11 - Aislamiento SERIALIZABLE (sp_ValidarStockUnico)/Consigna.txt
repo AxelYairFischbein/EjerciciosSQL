@@ -1,0 +1,16 @@
+Evitar lecturas fantasmas con SERIALIZABLE
+
+Enunciado:
+Crear un procedimiento sp_ValidarStockUnico que:
+• Inicie transacción con SERIALIZABLE.
+• Verifique si existe un producto con cierto nombre.
+• Si no existe → lo crea.
+• Si existe → retorna mensaje.
+• Debe evitar lecturas fantasmas (dos transacciones creando el mismo producto).
+
+Debe recibir:
+    @NombreProducto
+    @Precio
+
+Tabla de referencia:
+Productos(ID_Producto, Nombre, Precio)

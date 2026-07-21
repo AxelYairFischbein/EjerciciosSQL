@@ -1,0 +1,11 @@
+Ejercicio 2 – Subconsulta anidada y funciones agregadas
+
+Enunciado:
+Listá los clientes cuyo total acumulado de compras sea mayor al promedio de todos
+los totales de compra.
+Mostrá: nombre del cliente, total comprado.
+Usá una subconsulta anidada y una función de agregación.
+
+Tablas de referencia:
+Clientes(ID_Cliente, NombreCliente)
+Pedidos(ID_Pedido, ID_Cliente, ImporteTotal)

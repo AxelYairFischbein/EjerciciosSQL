@@ -1,0 +1,10 @@
+Ejercicio 5 – Creación de vista con filtros
+
+Enunciado:
+Creá una vista llamada vw_ClientesActivos2024 que muestre el nombre y el email de
+los clientes que realizaron al menos un pedido durante 2024.
+Usá YEAR() para filtrar.
+
+Tablas de referencia:
+Clientes(ID_Cliente, NombreCliente, Email)
+Pedidos(ID_Pedido, ID_Cliente, FechaPedido)

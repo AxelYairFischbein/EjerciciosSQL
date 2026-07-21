@@ -1,0 +1,16 @@
+Procedimiento con transacción y manejo de errores
+
+Enunciado:
+Crear el procedimiento sp_RegistrarPago, que:
+• Inserte un pago en la tabla Pagos.
+• Actualice la deuda del cliente en la tabla Clientes.
+• Use transacción + TRY CATCH.
+• Devuelva un mensaje de éxito o error.
+
+Debe recibir:
+    @ID_Cliente
+    @Importe
+
+Tablas de referencia:
+Clientes(ID_Cliente, Nombre, Deuda)
+Pagos(ID_Pago, ID_Cliente, Importe, Fecha)

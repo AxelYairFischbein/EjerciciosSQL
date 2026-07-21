@@ -1,0 +1,15 @@
+Función ITVF con condición y JOIN
+
+Enunciado:
+Crear una función Inline Table-Valued Function (ITVF) llamada fn_VentasPorCliente
+que reciba un @ClienteID y devuelva:
+    ID_Cliente
+    Nombre
+    TotalFacturado
+
+Debe sumar el importe de todas las facturas del cliente.
+Debe ser inline, sin BEGIN/END.
+
+Tablas de referencia:
+Clientes(ID_Cliente, Nombre)
+Facturas(ID_Factura, ID_Cliente, Importe)

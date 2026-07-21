@@ -1,0 +1,13 @@
+Guía de Ejercicios de Práctica – Parcial 2 (SQL Server)
+
+Ejercicio 1 – JOIN con condición lógica (Ejemplo resuelto)
+
+Enunciado:
+Mostrá los nombres de los productos cuya cantidad total vendida en el último mes
+supera las 20 unidades. Incluí también la categoría del producto.
+Usá al menos un JOIN y una función de sistema como GETDATE() o DATEADD().
+
+Tablas de referencia:
+Ventas(ID_Venta, ID_Producto, Cantidad, FechaVenta)
+Productos(ID_Producto, NombreProducto, ID_Categoria)
+Categorias(ID_Categoria, NombreCategoria)

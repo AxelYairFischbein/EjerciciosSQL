@@ -1,0 +1,36 @@
+Ejercicio de Examen – Función con CTE (MTVF)
+Tema: Funciones con retorno de tabla, CTE, validaciones y uso correcto de SQL Server.
+
+Enunciado:
+La empresa Charming Luxury Spa necesita analizar la ocupación histórica de sus
+habitaciones para optimizar tarifas y disponibilidad.
+
+Tabla:
+Reservas(ID_Reserva, ID_Habitacion, FechaIngreso, FechaEgreso, Estado)
+    ID_Reserva     INT
+    ID_Habitacion  INT
+    FechaIngreso   DATE
+    FechaEgreso    DATE
+    Estado         VARCHAR(20)
+
+Reglas del negocio:
+• Una reserva puede estar en estado: 'Confirmada', 'Check-In', 'Check-Out', 'Cancelada'.
+• El rango [FechaIngreso, FechaEgreso) se interpreta como ingreso inclusive, egreso exclusivo.
+
+Consigna:
+Crear una función con valor de tabla (MTVF) llamada fn_OcupacionPorHabitacion.
+Debe recibir: (@ID_Habitacion INT, @FechaDesde DATE, @FechaHasta DATE)
+Debe devolver un registro por cada día del rango solicitado con la estructura:
+    Fecha         DATE
+    TieneReserva  BIT
+
+Requisitos obligatorios:
+• Debe usarse al menos una CTE para generar el conjunto de fechas "día por día".
+• No se puede usar una tabla auxiliar del sistema.
+• No se puede usar WHILE ni cursores.
+• Validar que @FechaDesde < @FechaHasta; si no, devolver tabla vacía.
+• Una fecha tendrá TieneReserva = 1 solo si existe una reserva válida para esa fecha:
+    - Que coincida con la habitación.
+    - Que se superponga con el día analizado.
+    - Que no esté cancelada.
+• El resultado debe venir ordenado por Fecha ascendente.

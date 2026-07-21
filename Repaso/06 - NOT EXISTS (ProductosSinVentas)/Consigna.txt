@@ -1,0 +1,12 @@
+Productos sin ventas (subconsulta NOT EXISTS)
+
+Enunciado:
+Obtener todos los productos que no tienen ninguna venta registrada en la tabla Ventas.
+
+Debe devolver:
+    ID_Producto
+    Nombre
+
+Tablas de referencia:
+Productos(ID_Producto, Nombre)
+Ventas(ID_Venta, ID_Producto)

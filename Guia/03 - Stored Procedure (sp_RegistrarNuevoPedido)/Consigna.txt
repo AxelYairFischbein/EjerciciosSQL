@@ -1,0 +1,17 @@
+Ejercicio 3 – Procedimiento almacenado con validación
+
+Enunciado:
+Creá un procedimiento almacenado llamado sp_RegistrarNuevoPedido que reciba el ID
+de un cliente, la fecha del pedido y el importe. El procedimiento debe:
+• Verificar si el cliente existe.
+• Si no existe, mostrar un mensaje de error y cancelar.
+• Si existe, insertar el pedido en la tabla correspondiente.
+
+Debe recibir:
+    @ID_Cliente
+    @FechaPedido
+    @ImporteTotal
+
+Tablas de referencia:
+Clientes(ID_Cliente, NombreCliente)
+Pedidos(ID_Pedido, ID_Cliente, FechaPedido, ImporteTotal)

@@ -1,0 +1,12 @@
+Transacción completa con validación + rollback + mensaje custom
+
+Enunciado:
+Crear un procedimiento sp_TransferirSaldo que:
+• Reciba @Origen, @Destino, @Monto.
+• Verifique que el origen tenga saldo suficiente.
+• Si no lo tiene → RAISERROR con mensaje custom.
+• Si lo tiene → debita del origen y acredita en el destino.
+• Todos los pasos deben ir dentro de una transacción con ROLLBACK en caso de error.
+
+Tabla de referencia:
+Cuentas(ID_Cuenta, Titular, Saldo)

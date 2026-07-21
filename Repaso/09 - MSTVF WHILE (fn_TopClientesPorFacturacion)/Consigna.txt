@@ -1,0 +1,19 @@
+MSTVF con bucle WHILE para calcular totales
+
+Enunciado:
+Crear una Multi-Statement TVF fn_TopClientesPorFacturacion que:
+• Recorra la tabla Clientes con un WHILE.
+• Sume la facturación de cada cliente.
+• Devuelva solo los clientes cuyo total supere un valor mínimo pasado por parámetro.
+
+Debe recibir:
+    @Minimo
+
+Debe devolver:
+    ID_Cliente
+    Nombre
+    TotalFacturado
+
+Tablas de referencia:
+Clientes(ID_Cliente, Nombre)
+Facturas(ID_Factura, ID_Cliente, Importe)

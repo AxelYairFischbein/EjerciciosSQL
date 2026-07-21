@@ -1,0 +1,13 @@
+Subconsulta anidada con promedio
+
+Enunciado:
+Listar los productos cuyo precio está por encima del precio promedio global
+de todos los productos.
+
+Debe devolver:
+    ID_Producto
+    Nombre
+    Precio
+
+Tabla de referencia:
+Productos(ID_Producto, Nombre, Precio)
